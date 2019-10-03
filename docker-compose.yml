@@ -2,7 +2,7 @@ version: "3"
 
 services:
   speedtest:
-    conatiner_name: speedtest
+    container_name: speedtest
     domainname: "${DOMAIN_NAME}"
     hostname: "${HOST_NAME}"
     image: adolfintel/speedtest:latest

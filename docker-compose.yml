@@ -2,12 +2,18 @@ version: "3"
 
 services:
   speedtest:
+    conatiner_name: speedtest
     domainname: "${DOMAIN_NAME}"
     hostname: "${HOST_NAME}"
     image: adolfintel/speedtest:latest
     labels:
-      traefik.domain: "${HOST_NAME}.${DOMAIN_NAME}"
-      traefik.frontend.rule: "Host: speedtest.${HOST_NAME}.${DOMAIN_NAME}"
+      traefik.http.routers.speedtest_router.entryPoints: http
+      traefik.http.routers.speedtest_router.rule: Host(`speedtest.${HOST_NAME}.${DOMAIN_NAME}`)
+      traefik.http.routers.speedtest_tls_router.entryPoints: https
+      traefik.http.routers.speedtest_tls_router.rule: Host(`speedtest.${HOST_NAME}.${DOMAIN_NAME}`)
+      traefik.http.routers.speedtest_tls_router.tls: true
+      traefik.http.middlewares.https_redirect.redirectscheme.scheme: https
+      traefik.http.routers.speedtest_router.middlewares: https_redirect
     restart: always
 
 networks:

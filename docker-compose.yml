@@ -6,6 +6,8 @@ services:
     domainname: "${DOMAIN_NAME}"
     hostname: "${HOST_NAME}"
     image: adolfintel/speedtest:latest
+    ports:
+      - '80:80'
     labels:
       traefik.http.routers.speedtest_router.entryPoints: http
       traefik.http.routers.speedtest_router.rule: Host(`speedtest.${HOST_NAME}.${DOMAIN_NAME}`)
